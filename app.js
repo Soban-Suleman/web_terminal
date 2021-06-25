@@ -2,7 +2,6 @@ require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const path = require("path");
 const hbs = require("hbs");
@@ -43,12 +42,6 @@ app.use(passport.session());
 app.use(flash());
 
 app.use(cors());
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: "/tmp/",
-  })
-);
 
 const static_path = path.join(__dirname, "./public");
 const views_path = path.join(__dirname, "./templates/views");
@@ -111,7 +104,6 @@ app.use(function (req, res, next) {
 });
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
-app.use("/api/products", productsRouter);
 
 // Add headers
 
